@@ -1,0 +1,30 @@
+{
+  "name": "Scrape-of-VICE",
+  "version": "1.0.0",
+  "description": "Web app which scrapes articles utilizing axios/cheerio then logs articles and comments in mongo DB utilizing Mongoose",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jponly/Scrape-of-VICE.git"
+  },
+  "keywords": [],
+  "author": "Jerome Pangelinan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jponly/Scrape-of-VICE/issues"
+  },
+  "homepage": "https://github.com/jponly/Scrape-of-VICE#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "cheerio": "^1.0.0-rc.2",
+    "express": "^4.16.3",
+    "express-handlebars": "^3.0.0",
+    "mongoose": "^5.3.2",
+    "morgan": "^1.9.1",
+    "require": "^2.4.20"
+  }
+}
