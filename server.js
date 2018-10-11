@@ -1,7 +1,8 @@
 var express = require("express");
 var logger = require("morgan");
 var mongoose = require("mongoose");
-var handlebars = require("express-handlebars");
+var exphbs = require("express-handlebars");
+var bodyParser = require("body-parser");
 // ^ requiring our standard frameworks to utilize node.js/database and logging of actions
 
 // requiring axois/cheerio for web scraping
@@ -22,6 +23,18 @@ app.use(logger("dev"));
 // code which turns data into JSON object, which is more readable for computer to go through data and extract or manipulate
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+// parse applications handlebars
+// app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(bodyParser.json());
+
+// handlebars portion
+var exphbs = require("express-handlebars");
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
+
+// app.use(routes);
+
 // Make public folder static
 app.use(express.static("public"));
 
@@ -34,10 +47,6 @@ app.get("/scrape", function (req, res) {
 
 
     // axios.get("https://www.vice.com/en_us").then(function(response) {
-
-
-
-
 
 
     // load into cheerio and save to $ for shorthand selector
