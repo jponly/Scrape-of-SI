@@ -32,8 +32,16 @@ mongoose.connect("mongodb://localhost/homeworkDatabase", { useNewUrlParser: true
 // GET route for scraper vice website
 app.get("/scrape", function (req, res) {
 
-    axios.get("https://www.si.com/").then(function(response) {
-        // load into cheerio and save to $ for shorthand selector
+
+    // axios.get("https://www.vice.com/en_us").then(function(response) {
+
+
+
+
+
+
+    // load into cheerio and save to $ for shorthand selector
+    axios.get("https://www.si.com/").then(function (response) {
         var $ = cheerio.load(response.data);
         //  grab h2 with article tag
         $("article h2").each(function (i, element) {
@@ -73,13 +81,13 @@ app.get("/articles", function (req, res) {
             // If able to find article, send back to client
             res.json(dbArticle);
         })
-        .catch(function(err) {
+        .catch(function (err) {
             res.json(err);
         });
 });
 
 //route to get article by id
-app.get("/articles/:id", function(req, res) {
+app.get("/articles/:id", function (req, res) {
     db.Article.findOne({ _id: req.params.id })
         .populate("comment")
         .then(function (dbArticle) {
@@ -92,15 +100,15 @@ app.get("/articles/:id", function(req, res) {
 });
 
 // route for saving/updating article's comment
-app.post("/articles/:id", function(req, res) {
+app.post("/articles/:id", function (req, res) {
     db.Comment.create(req.body)
-        .then(function(dbComment) {
+        .then(function (dbComment) {
             return db.Article.findOneAndUpdate({ _id: req.params.id }, { comment: dbComment._id }, { new: true });
         })
         .then(function (dbArticle) {
             res.json(dbArticle);
         })
-        .catch(function(err) {
+        .catch(function (err) {
             res.json(err);
         });
 });
