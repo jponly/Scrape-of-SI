@@ -26,15 +26,15 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // code to link to mongoDB
-mongoose.connect("mongodb://localhost/viceArticles", { useNewUrlParser: true });
+mongoose.connect("mongodb://localhost/homeworkDatabase", { useNewUrlParser: true });
 
 // Scraper routes
 // GET route for scraper vice website
 app.get("/scrape", function (req, res) {
 
-    axios.get("https://www.vice.com/en_us").then(function(response) {
+    axios.get("https://www.si.com/").then(function(response) {
         // load into cheerio and save to $ for shorthand selector
-        var $ = cherrio.load(response.data);
+        var $ = cheerio.load(response.data);
         //  grab h2 with article tag
         $("article h2").each(function (i, element) {
             // empty result object
@@ -60,7 +60,7 @@ app.get("/scrape", function (req, res) {
         });
 
         // message if scrape is complete
-        res.send("scrape complete");
+        res.send("Scrape Complete");
     });
 });
 
