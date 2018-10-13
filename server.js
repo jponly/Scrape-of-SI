@@ -1,7 +1,7 @@
 var express = require("express");
 var logger = require("morgan");
 var mongoose = require("mongoose");
-
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
 
 
 // requiring axois/cheerio for web scraping
@@ -31,8 +31,8 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // code to link to mongoDB
-mongoose.connect("mongodb://localhost/homeworkDatabase", { useNewUrlParser: true });
-
+// mongoose.connect("mongodb://localhost/homeworkDatabase", { useNewUrlParser: true });
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 // Scraper routes
 // GET route for scraper vice website
 app.get("/scrape", function (req, res) {
