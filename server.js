@@ -11,7 +11,7 @@ var cheerio = require("cheerio");
 // variable to require all databases
 var db = require("./models");
 
-var PORT = 3000;
+var PORT = 8080;
 
 // variable for express use
 var app = express();
@@ -115,7 +115,7 @@ app.post("/articles/:id", function (req, res) {
         });
 });
 
-app.listen(PORT, function () {
+app.listen(process.env.PORT || PORT, function () {
     console.log("App running on port " + PORT + "!");
 });
 
