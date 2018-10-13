@@ -3,7 +3,7 @@ var logger = require("morgan");
 var mongoose = require("mongoose");
 var exphbs = require("express-handlebars");
 var bodyParser = require("body-parser");
-// ^ requiring our standard frameworks to utilize node.js/database and logging of actions
+
 
 // requiring axois/cheerio for web scraping
 var axios = require("axios");
@@ -20,7 +20,7 @@ var app = express();
 // code for logger middleware
 app.use(logger("dev"));
 
-// code which turns data into JSON object, which is more readable for computer to go through data and extract or manipulate
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
@@ -33,7 +33,8 @@ var exphbs = require("express-handlebars");
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
-// app.use(routes);
+
+
 
 // Make public folder static
 app.use(express.static("public"));
@@ -46,7 +47,7 @@ mongoose.connect("mongodb://localhost/homeworkDatabase", { useNewUrlParser: true
 app.get("/scrape", function (req, res) {
 
 
-    // axios.get("https://www.vice.com/en_us").then(function(response) {
+
 
 
     // load into cheerio and save to $ for shorthand selector
@@ -89,6 +90,7 @@ app.get("/articles", function (req, res) {
         .then(function (dbArticle) {
             // If able to find article, send back to client
             res.json(dbArticle);
+            res.render("artcle", {articles: dbArticle})
         })
         .catch(function (err) {
             res.json(err);
