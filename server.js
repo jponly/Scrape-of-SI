@@ -1,8 +1,7 @@
 var express = require("express");
 var logger = require("morgan");
 var mongoose = require("mongoose");
-var exphbs = require("express-handlebars");
-var bodyParser = require("body-parser");
+
 
 
 // requiring axois/cheerio for web scraping
@@ -24,14 +23,6 @@ app.use(logger("dev"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// parse applications handlebars
-// app.use(bodyParser.urlencoded({ extended: true }));
-// app.use(bodyParser.json());
-
-// handlebars portion
-var exphbs = require("express-handlebars");
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
-app.set("view engine", "handlebars");
 
 
 
@@ -78,7 +69,7 @@ app.get("/scrape", function (req, res) {
         });
 
         // message if scrape is complete
-        res.send("Scrape Complete");
+        res.send("Articles scraped and inserted into DB");
     });
 });
 
