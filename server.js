@@ -3,7 +3,6 @@ var logger = require("morgan");
 var mongoose = require("mongoose");
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
 
-
 // requiring axois/cheerio for web scraping
 var axios = require("axios");
 var cheerio = require("cheerio");
@@ -19,26 +18,16 @@ var app = express();
 // code for logger middleware
 app.use(logger("dev"));
 
-
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
-
-
-
 
 // Make public folder static
 app.use(express.static("public"));
 
-// code to link to mongoDB
-// mongoose.connect("mongodb://localhost/homeworkDatabase", { useNewUrlParser: true });
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 // Scraper routes
 // GET route for scraper vice website
 app.get("/scrape", function (req, res) {
-
-
-
 
 
     // load into cheerio and save to $ for shorthand selector
@@ -72,7 +61,6 @@ app.get("/scrape", function (req, res) {
         res.send("Articles scraped and inserted into DB");
     });
 });
-
 
 // route to get articles from db
 app.get("/articles", function (req, res) {
